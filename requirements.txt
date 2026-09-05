@@ -1,0 +1,38 @@
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+pydantic==2.9.2
+pydantic-settings==2.5.2
+python-multipart==0.0.9
+python-dotenv==1.0.1
+
+# Orchestration
+langgraph==0.2.34
+langchain==0.3.3
+langchain-core==0.3.10
+langchain-community==0.3.2
+langchain-openai==0.2.2
+langchain-groq==0.2.0
+langchain-google-genai==2.0.1
+
+# Vector stores / embeddings
+faiss-cpu==1.8.0.post1
+qdrant-client==1.11.3
+sentence-transformers==3.1.1
+
+# Document loaders
+pypdf==4.3.1
+unstructured==0.15.13
+
+# Web search
+tavily-python==0.5.0
+
+# DB / memory
+motor==3.6.0
+pymongo==4.9.1
+
+# Frontend
+streamlit==1.38.0
+requests==2.32.3
+
+# Utils
+pyyaml==6.0.2
