@@ -51,7 +51,12 @@ def get_llm(temperature: float = 0.0) -> BaseChatModel:
 
 
 def get_embeddings():
-    """Local/free HuggingFace sentence-transformer embeddings (no API cost)."""
-    from langchain_community.embeddings import HuggingFaceEmbeddings
+    """Lightweight, no-PyTorch embeddings (fastembed, ONNX-based) — this uses
+    far less memory than sentence-transformers/torch, which was crashing the
+    Render free-tier instance (512 MB RAM limit) with out-of-memory restarts.
+    """
+    from langchain_community.embeddings import FastEmbedEmbeddings
 
-    return HuggingFaceEmbeddings(model_name=settings.embedding_model)
+    # BAAI/bge-small-en-v1.5 outputs 384-dim vectors — same dimension as the
+    # MiniLM model this replaces, so the existing FAISS/Qdrant setup is unaffected.
+    return FastEmbedEmbeddings(model_name="BAAI/bge-small-en-v1.5")

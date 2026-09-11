@@ -17,7 +17,7 @@ langchain-google-genai==2.0.1
 # Vector stores / embeddings
 faiss-cpu==1.15.0
 qdrant-client==1.11.3
-sentence-transformers==3.1.1
+fastembed==0.3.6
 
 # Document loaders
 pypdf==4.3.1
