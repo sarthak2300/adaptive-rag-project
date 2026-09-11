@@ -58,12 +58,15 @@ with st.sidebar:
     st.subheader("📤 Upload a document")
     uploaded = st.file_uploader("PDF or TXT", type=["pdf", "txt", "md"])
     if uploaded and st.button("Ingest document"):
-        with st.spinner("Chunking + embedding + storing..."):
+        with st.spinner(
+            "Chunking + embedding + storing... (first request after inactivity "
+            "can take 1-2 extra minutes while the free backend wakes up)"
+        ):
             try:
                 resp = requests.post(
                     api_url("/rag/documents/upload"),
                     files={"file": (uploaded.name, uploaded.getvalue())},
-                    timeout=120,
+                    timeout=300,
                 )
                 resp.raise_for_status()
                 data = resp.json()
@@ -122,12 +125,12 @@ if question:
         st.markdown(question)
 
     with st.chat_message("assistant"):
-        with st.spinner("Thinking..."):
+        with st.spinner("Thinking... (first request after inactivity can take a minute)"):
             try:
                 resp = requests.post(
                     api_url("/rag/query"),
                     json={"question": question, "session_id": session_id},
-                    timeout=120,
+                    timeout=300,
                 )
                 resp.raise_for_status()
                 data = resp.json()
